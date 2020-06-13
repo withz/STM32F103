@@ -69,9 +69,10 @@ void TM1638_ReadBytes(u8 addr, u32 len, u8 *buf)
     
     TM1638_Input();
     for(i=0;i<len;i++){
-        *buf=TM1638_ReadByte();
+        *buf=TM1638_ReadWriteByte(0);
         buf++;
     }
+		
     TM1638_Disable();
     TM1638_Output();
 }

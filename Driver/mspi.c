@@ -254,7 +254,7 @@ void MSPI_WriteReg(Mspi *m, u8 addr, u8 data)
     MSPI_End(m);
 }
 
-void MSPI_ReadReg(Mspi *m, u8 addr)
+u8 MSPI_ReadReg(Mspi *m, u8 addr)
 {
     u8 data=0;
     MSPI_Start(m);
@@ -268,11 +268,11 @@ void MSPI_ReadReg(Mspi *m, u8 addr)
 
 void MSPI_WriteMultiReg(Mspi *m, u8 addr, u32 len, u8 *data)
 {
-    
+    // Not Implement
 }
 
 void MSPI_ReadMultiReg(Mspi *m, u8 addr, u32 len, u8 *data)
 {
-    
+    // Not Implement
 }
 

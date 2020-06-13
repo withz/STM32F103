@@ -28,6 +28,11 @@ void MI2C_SetNoAck(Mi2c* m);
 void MI2C_SetAck(Mi2c* m);
 u8 MI2C_GetAck(Mi2c* m);
 
+u8 MI2C_WriteReg(Mi2c* m, u8 device, u8 reg, u8 cmd);
+u8 MI2C_ReadReg(Mi2c* m, u8 device, u8 reg);
+u8 MI2C_WriteMiltiReg(Mi2c* m, u8 device, u8 reg, u32 len, u8 *buf);
+u8 MI2C_ReadMiltiReg(Mi2c* m, u8 device, u8 reg, u32 len, u8 *buf);
+
 
 
 

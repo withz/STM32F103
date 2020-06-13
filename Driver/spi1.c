@@ -28,7 +28,7 @@ void SPI1M_Configuration()
     spi1.SPI_Direction = SPI_Direction_1Line_Tx;
     spi1.SPI_Mode = SPI_Mode_Master;
     spi1.SPI_DataSize = SPI_DataSize_8b;
-    spi1.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_4;
+    spi1.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_128;
     spi1.SPI_CPHA = SPI_CPHA_2Edge;
     spi1.SPI_CPOL = SPI_CPOL_High;
     spi1.SPI_FirstBit = SPI_FirstBit_LSB;
@@ -77,6 +77,7 @@ void SPI1_Output()
 
 u8 SPI1_ReadWriteByte(u8 w)
 {
+	u8 data=0;
     u32 wait=200;
     while(SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE)==RESET){
         if(wait<10) break;
@@ -89,7 +90,8 @@ u8 SPI1_ReadWriteByte(u8 w)
         if(wait<10) break;
         wait--;
     }
-    return SPI_I2S_ReceiveData(SPI1);
+    data= SPI_I2S_ReceiveData(SPI1);
+		return data;
 }
 
 u8 SPI1_ReadByte(void)

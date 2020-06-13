@@ -1,6 +1,6 @@
 --cpu Cortex-M3
 ".\main.o"
-".\delay_1.o"
+".\delay.o"
 ".\bstring.o"
 ".\flash.o"
 ".\gpio.o"
@@ -12,8 +12,6 @@
 ".\spi1.o"
 ".\mspi.o"
 ".\tm1638.o"
-".\startup_stm32f10x_md.o"
-".\system_stm32f10x.o"
 ".\misc.o"
 ".\stm32f10x_crc.o"
 ".\stm32f10x_dbgmcu.o"
@@ -25,6 +23,8 @@
 ".\stm32f10x_spi.o"
 ".\stm32f10x_tim.o"
 ".\stm32f10x_usart.o"
+".\startup_stm32f10x_md.o"
+".\system_stm32f10x.o"
 --strict --scatter ".\MainBoard.sct"
 --summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
