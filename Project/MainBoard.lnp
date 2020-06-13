@@ -10,6 +10,7 @@
 ".\usart2.o"
 ".\usart3.o"
 ".\spi1.o"
+".\mspi.o"
 ".\tm1638.o"
 ".\startup_stm32f10x_md.o"
 ".\system_stm32f10x.o"

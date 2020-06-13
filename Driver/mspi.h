@@ -23,4 +23,13 @@ typedef struct MSPI_t{
 	u16 time;
 }Mspi;
 
+void MSPI_Init(Mspi *m);
+void MSPI_Start(Mspi *m);
+void MSPI_End(Mspi *m);
+void MSPI_In(Mspi *m);
+void MSPI_Out(Mspi *m);
+void MSPI_WriteByte(Mspi *m, u8 byte);
+u8 MSPI_ReadByte(Mspi *m);
+u8 MSPI_ReadWriteByte(Mspi *m, u8 byte);
+
 #endif
