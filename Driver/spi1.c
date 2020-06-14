@@ -58,6 +58,13 @@ void SPI1_HighFirst(u8 h)
 	SPI_Cmd(SPI1,ENABLE);
 }
 
+void SPI1_SetDoubleMode(void)
+{
+	spi1.SPI_Direction = SPI_Direction_2Lines_FullDuplex;
+	SPI_Init(SPI1,&spi1);
+	SPI_Cmd(SPI1,ENABLE);
+}
+
 void SPI1_SetSingleMode(void)
 {
 	spi1.SPI_Direction = SPI_Direction_1Line_Tx;
@@ -91,7 +98,12 @@ u8 SPI1_ReadWriteByte(u8 w)
         wait--;
     }
     data= SPI_I2S_ReceiveData(SPI1);
-		return data;
+    wait=200;
+    while(SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_BSY)==RESET){
+        if(wait<10) break;
+        wait--;
+    }
+    return data;
 }
 
 u8 SPI1_ReadByte(void)

@@ -268,11 +268,26 @@ u8 MSPI_ReadReg(Mspi *m, u8 addr)
 
 void MSPI_WriteMultiReg(Mspi *m, u8 addr, u32 len, u8 *data)
 {
-    // Not Implement
+    MSPI_Start(m);
+    MSPI_Out(m);
+    MSPI_WriteByte(m, addr);
+    while(len--){
+        MSPI_WriteByte(m, *data);
+        data++;
+    }
+    MSPI_End(m);
 }
 
 void MSPI_ReadMultiReg(Mspi *m, u8 addr, u32 len, u8 *data)
 {
-    // Not Implement
+    MSPI_Start(m);
+    MSPI_Out(m);
+    MSPI_WriteByte(m, addr);
+    MSPI_In(m);
+    while(len--){
+        *data=MSPI_ReadByte(m);
+        data++;
+    }
+    MSPI_End(m);
 }
 

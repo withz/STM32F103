@@ -1,5 +1,5 @@
 #include "main.h"
-#include <stdio.h>
+
 
 
 u32 key=0;
@@ -25,6 +25,7 @@ void finish(){
 int main(void)
 {	
     u8 i;
+    u32 len;
 	int x=100;
 	char buf[100];
     SystemInit();
@@ -49,13 +50,33 @@ int main(void)
 	
 		MI2C_Init(&mpu6050);
 		x=MI2C_ReadReg(&mpu6050,0x68, 0x01);
-    
+        
+        USB_Port_Set(0);
+        delay_ms(700);
+        USB_Port_Set(1);
+        
+        Set_USBClock();   
+        USB_Interrupts_Config();    
+        USB_Init();
+        
 		while(1)
 		{
 			USART1_SendWords((u8*)"ABC",3);
 			delay_ms(200);
 			USART1_DMASendWords((u8*)"DEF",3);
 			delay_ms(200);
+            usb_printf("wait...\r\n");
+            if(USB_USART_RX_STA&0x8000) // sent data end up with "\r\n"
+            {					   
+                len=USB_USART_RX_STA&0x3FFF;// set rx data len
+                usb_printf("\r\nyou are sending:%d\r\n\r\n",len);
+                for(i=0;i<len;i++)
+                {
+                    USB_USART_SendData(USB_USART_RX_BUF[i]);//以字节方式,发送给USB 
+                }
+                usb_printf("\r\n\r\n");//插入换行
+                USB_USART_RX_STA=0;
+            }
 		}
 }
 
